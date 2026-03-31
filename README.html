@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fiche Révision — Physique-Chimie</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #13161d;
+    --surface2: #1a1f2a;
+    --border: #252c3a;
+    --accent1: #7dd3fc; /* sky blue */
+    --accent2: #f9a8d4; /* pink */
+    --accent3: #86efac; /* green */
+    --accent4: #fcd34d; /* amber */
+    --accent5: #c4b5fd; /* violet */
+    --text: #e8eaf0;
+    --muted: #6b7280;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    padding: 40px 20px 60px;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+  }
+  .header::before {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent1), var(--accent5));
+    margin: 0 auto 20px;
+  }
+  .header .subject {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--accent1);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 800;
+    letter-spacing: -1px;
+    background: linear-gradient(135deg, #e8eaf0 30%, var(--accent5) 70%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+  }
+  .header .subtitle {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    color: var(--muted);
+    font-size: 15px;
+    margin-top: 10px;
+  }
+
+  /* CHAPITRE TITLE */
+  .chapitre {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 50px 0 24px;
+  }
+  .chapitre-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .ch11 .chapitre-num { background: rgba(125,211,252,0.15); color: var(--accent1); border: 1px solid rgba(125,211,252,0.3); }
+  .ch12 .chapitre-num { background: rgba(249,168,212,0.15); color: var(--accent2); border: 1px solid rgba(249,168,212,0.3); }
+  .ch13 .chapitre-num { background: rgba(134,239,172,0.15); color: var(--accent3); border: 1px solid rgba(134,239,172,0.3); }
+
+  .chapitre-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .chapitre::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 14px;
+  }
+  .grid-3 {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+
+  /* CARD */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent5);
+  }
+  .card-header {
+    padding: 12px 16px 10px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.3px;
+  }
+  .card-body {
+    padding: 14px 16px;
+  }
+
+  /* DEF BOX */
+  .def {
+    background: var(--surface2);
+    border-left: 3px solid var(--accent5);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    font-size: 12.5px;
+    color: #c5c9d4;
+    line-height: 1.6;
+  }
+
+  /* FORMULA */
+  .formula-block {
+    background: #0a0d12;
+    border: 1px solid #1e2533;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin: 10px 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--accent4);
+    letter-spacing: 0.5px;
+  }
+  .formula-label {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+
+  /* EXAMPLE */
+  .examples {
+    margin-top: 12px;
+  }
+  .ex-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .ex-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .ex-item {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 5px;
+    align-items: flex-start;
+  }
+  .ex-arrow {
+    color: var(--accent3);
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-size: 11px;
+  }
+  .ex-text {
+    font-size: 12px;
+    color: #9ca3af;
+    font-family: 'DM Mono', monospace;
+  }
+  .eq {
+    font-family: 'DM Mono', monospace;
+    color: var(--accent1);
+    font-size: 11.5px;
+    display: block;
+    margin: 2px 0;
+  }
+
+  /* PARTICLE TAG */
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.5px;
+    margin: 2px 2px 2px 0;
+  }
+  .tag-blue { background: rgba(125,211,252,0.1); color: var(--accent1); border: 1px solid rgba(125,211,252,0.2); }
+  .tag-pink { background: rgba(249,168,212,0.1); color: var(--accent2); border: 1px solid rgba(249,168,212,0.2); }
+  .tag-green { background: rgba(134,239,172,0.1); color: var(--accent3); border: 1px solid rgba(134,239,172,0.2); }
+  .tag-amber { background: rgba(252,211,77,0.1); color: var(--accent4); border: 1px solid rgba(252,211,77,0.2); }
+  .tag-violet { background: rgba(196,181,253,0.1); color: var(--accent5); border: 1px solid rgba(196,181,253,0.2); }
+
+  /* LOIS TABLE */
+  .mini-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11.5px;
+    margin: 8px 0;
+  }
+  .mini-table th {
+    background: var(--surface2);
+    color: var(--muted);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 10px;
+    padding: 6px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .mini-table td {
+    padding: 6px 10px;
+    border-bottom: 1px solid rgba(37,44,58,0.5);
+    color: #c5c9d4;
+  }
+  .mini-table tr:last-child td { border-bottom: none; }
+
+  /* WIDE CARD */
+  .card-wide {
+    grid-column: 1 / -1;
+  }
+
+  /* PROP LIST */
+  .prop-list { list-style: none; }
+  .prop-list li {
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(37,44,58,0.6);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12.5px;
+    color: #c5c9d4;
+  }
+  .prop-list li:last-child { border-bottom: none; }
+  .prop-list li::before {
+    content: '→';
+    color: var(--accent3);
+    flex-shrink: 0;
+    font-size: 11px;
+    margin-top: 2px;
+  }
+
+  /* HIGHLIGHT */
+  strong { color: var(--text); font-weight: 600; }
+  em { font-style: italic; color: var(--accent5); font-family: 'Instrument Serif', serif; font-size: 14px; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    margin-top: 60px;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  @media print {
+    body { background: white; color: black; padding: 10px; }
+    .card { border: 1px solid #ccc; page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="subject">2nde — Physique-Chimie · 2025-2026</div>
+  <h1>Transformations<br>de la Matière</h1>
+  <div class="subtitle">Nucléaires · Physiques · Chimiques</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ CHAPITRE 11 -->
+<div class="chapitre ch11">
+  <div class="chapitre-num">Chap. 11</div>
+  <div class="chapitre-title">Transformations nucléaires</div>
+</div>
+
+<div class="grid">
+
+  <!-- NOYAUX ISOTOPES -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-dot" style="background:var(--accent1)"></div>
+      <div class="card-title">Noyaux isotopes</div>
+    </div>
+    <div class="card-body">
+      <div class="def">Noyaux possédant le <strong>même nombre de protons (Z)</strong> mais des <strong>nombres de neutrons (N) différents</strong>. Ils appartiennent au même élément chimique.</div>
+      <div class="examples">
+        <div class="ex-label">Exemples</div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text">Carbone : <span class="eq">¹²₆C · ¹³₆C · ¹⁴₆C</span></span></div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text">Néon : <span class="eq">²⁰Ne (90,48%) · ²¹Ne · ²²Ne</span></span></div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text">Silicium ²⁸Si (Z=14, N=14) et ²⁹Si (Z=14, N=15)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOIS DE CONSERVATION -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-dot" style="background:var(--accent5)"></div>
+      <div class="card-title">Lois de conservation</div>
+    </div>
+    <div class="card-body">
+      <div class="def">Lors d'une transformation nucléaire, deux grandeurs sont <strong>toujours conservées</strong> :</div>
+      <div class="formula-block">
+        <div class="formula-label">Conservation</div>
+        A₁ + A₂ = A₃ + A₄  (nucléons)<br>
+        Z₁ + Z₂ = Z₃ + Z₄  (charges)
+      </div>
+      <div class="examples">
+        <div class="ex-label">Exemples</div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text"><span class="eq">¹⁴₆C → ¹⁴₇N + ⁰₋₁e</span><br>masses : 14=14+0 ✓ charges : 6=7+(-1) ✓</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RADIOACTIVITÉ β⁻ -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-dot" style="background:var(--accent2)"></div>
+      <div class="card-title">Radioactivité β⁻</div>
+      <span class="tag tag-pink">émission e⁻</span>
+    </div>
+    <div class="card-body">
+      <div class="def">Transformation d'un <strong>neutron en proton</strong> avec émission d'un <strong>électron</strong> (⁰₋₁e). Concerne les noyaux avec <em>excès de neutrons</em>.</div>
+      <div class="examples">
+        <div class="ex-label">Exemples</div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text">Carbone 14 :<span class="eq">¹⁴₆C → ¹⁴₇N + ⁰₋₁e</span></span></div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text">Phosphore 32 :<span class="eq">³²₁₅P → ³²₁₆S + ⁰₋₁e</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RADIOACTIVITÉ β⁺ -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-dot" style="background:var(--accent4)"></div>
+      <div class="card-title">Radioactivité β⁺</div>
+      <span class="tag tag-amber">émission e⁺</span>
+    </div>
+    <div class="card-body">
+      <div class="def">Transformation d'un <strong>proton en neutron</strong> avec émission d'un <strong>positon</strong> (⁰₊₁e). Concerne les noyaux avec <em>excès de protons</em>.</div>
+      <div class="examples">
+        <div class="ex-label">Exemples</div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text">Fluor 18 :<span class="eq">¹⁸₉F → ¹⁸₈O + ⁰₊₁e</span>(imagerie TEP)</span></div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text">Césium 130 :<span class="eq">¹³⁰₅₅Cs → ¹³⁰₅₄Xe + ⁰₊₁e</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RADIOACTIVITÉ α -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-dot" style="background:var(--accent3)"></div>
+      <div class="card-title">Radioactivité α</div>
+      <span class="tag tag-green">émission ⁴He</span>
+    </div>
+    <div class="card-body">
+      <div class="def">Émission d'un <strong>noyau d'hélium</strong> (⁴₂He). Concerne les <em>noyaux lourds</em> avec excès de nucléons.</div>
+      <div class="examples">
+        <div class="ex-label">Exemples</div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text">Uranium 238 :<span class="eq">²³⁸₉₂U → ²³⁴₉₀Th + ⁴₂He</span></span></div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text">Radium 226 :<span class="eq">²²⁶₈₈Ra → ²²²₈₆Rn + ⁴₂He</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FISSION -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-dot" style="background:var(--accent1)"></div>
+      <div class="card-title">Fission nucléaire</div>
+    </div>
+    <div class="card-body">
+      <div class="def">Un <strong>noyau lourd</strong> se scinde en 2 noyaux plus légers sous l'impact d'un <strong>neutron</strong>. Libère une énergie colossale.</div>
+      <div class="examples">
+        <div class="ex-label">Exemples</div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text">Uranium 235 :<span class="eq">²³⁵₉₂U + ¹₀n → ⁹²₃₆Kr + ¹⁴¹₅₆Ba + 3¹₀n</span></span></div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text">1g d'U-235 libère 7,3×10¹⁰ J (= fusion de 220t de glace)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FUSION -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-dot" style="background:var(--accent5)"></div>
+      <div class="card-title">Fusion nucléaire</div>
+    </div>
+    <div class="card-body">
+      <div class="def">Deux <strong>noyaux légers s'assemblent</strong> pour former un noyau plus lourd. Se produit dans les <em>étoiles</em>. Projet ITER.</div>
+      <div class="examples">
+        <div class="ex-label">Exemples</div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text">Deutérium + Tritium :<span class="eq">²₁H + ³₁H → ⁴₂He + ¹₀n</span></span></div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text">Dans les étoiles :<span class="eq">⁸₄Be + ⁴₂He → ¹²₆C</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TYPES RADIOACTIVITÉ RECAP -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-dot" style="background:var(--accent4)"></div>
+      <div class="card-title">Récap des 3 radioactivités</div>
+    </div>
+    <div class="card-body">
+      <table class="mini-table">
+        <tr><th>Type</th><th>Particule émise</th><th>Noyaux concernés</th></tr>
+        <tr><td><span class="tag tag-pink">β⁻</span></td><td>électron ⁰₋₁e</td><td>excès neutrons</td></tr>
+        <tr><td><span class="tag tag-amber">β⁺</span></td><td>positon ⁰₊₁e</td><td>excès protons</td></tr>
+        <tr><td><span class="tag tag-green">α</span></td><td>hélium ⁴₂He</td><td>noyaux lourds</td></tr>
+      </table>
+      <div class="def" style="margin-top:10px; margin-bottom:0">Diagramme de Ségré : 256 noyaux stables parmi +2800 noyaux connus.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════ CHAPITRE 12 -->
+<div class="chapitre ch12" style="margin-top:50px">
+  <div class="chapitre-num">Chap. 12</div>
+  <div class="chapitre-title">Transformations physiques</div>
+</div>
+
+<div class="grid">
+
+  <!-- CHANGEMENT D'ÉTAT -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-dot" style="background:var(--accent2)"></div>
+      <div class="card-title">Changement d'état</div>
+    </div>
+    <div class="card-body">
+      <div class="def">Lors d'un changement d'état, les <strong>entités chimiques et espèces chimiques sont conservées</strong>. C'est une <em>transformation physique</em>.</div>
+      <table class="mini-table">
+        <tr><th>État</th><th>Caractère</th></tr>
+        <tr><td>Solide</td><td>Condensé + <strong>ordonné</strong></td></tr>
+        <tr><td>Liquide</td><td>Condensé + <strong>désordonné</strong></td></tr>
+        <tr><td>Gazeux</td><td>Dispersé + <strong>désordonné</strong></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ÉTAT CONDENSÉ / DISPERSÉ -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-dot" style="background:var(--accent1)"></div>
+      <div class="card-title">Condensé vs Dispersé</div>
+    </div>
+    <div class="card-body">
+      <div class="def"><strong>État condensé :</strong> la distance entre entités est du même ordre de grandeur que leur taille.</div>
+      <div class="def"><strong>État dispersé :</strong> la distance entre entités est grande devant leur taille.</div>
+      <div class="examples">
+        <div class="ex-label">Écriture symbolique</div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text"><span class="eq">Al₂O₃(s) → Al₂O₃(l)</span> fusion alumine</span></div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text"><span class="eq">H₂O(g) → H₂O(l)</span> liquéfaction eau</span></div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text"><span class="eq">I₂(s) → I₂(g)</span> sublimation diiode</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CORPS PUR / TEMP CONSTANTE -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-dot" style="background:var(--accent3)"></div>
+      <div class="card-title">Corps pur & T° constante</div>
+    </div>
+    <div class="card-body">
+      <div class="def">Pour un <strong>corps pur</strong>, le changement d'état se fait à <strong>température constante</strong> (pression constante). Ces températures permettent d'identifier une espèce chimique.</div>
+      <div class="examples">
+        <div class="ex-label">Propriétés clés</div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text">θ<sub>fusion</sub> = θ<sub>solidification</sub></span></div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text">θ<sub>vaporisation</sub> = θ<sub>liquéfaction</sub></span></div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text">Palier de température = coexistence de 2 états</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FUSION vs DISSOLUTION -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-dot" style="background:var(--accent5)"></div>
+      <div class="card-title">Fusion vs Dissolution</div>
+    </div>
+    <div class="card-body">
+      <table class="mini-table">
+        <tr><th></th><th>Fusion</th><th>Dissolution</th></tr>
+        <tr><td>Espèces</td><td>1 seule</td><td>≥ 2 (solvant + soluté)</td></tr>
+        <tr><td>Résultat</td><td>Même espèce, état liquide</td><td>Solution homogène</td></tr>
+        <tr><td>Type</td><td>Physique</td><td>Physique/chimique</td></tr>
+      </table>
+      <div class="def" style="margin-top:10px; margin-bottom:0">La dissolution nécessite un <strong>solvant</strong> — espèce chimique particulière qui conduit à une solution.</div>
+    </div>
+  </div>
+
+  <!-- ENDO / EXOTHERMIQUE -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-dot" style="background:var(--accent4)"></div>
+      <div class="card-title">Endo / Exothermique</div>
+    </div>
+    <div class="card-body">
+      <div class="def"><strong>Endothermique :</strong> le système <em>reçoit</em> de l'énergie par transfert thermique depuis l'extérieur.</div>
+      <div class="def"><strong>Exothermique :</strong> le système <em>cède</em> de l'énergie par transfert thermique vers l'extérieur.</div>
+      <table class="mini-table">
+        <tr><th>Endothermique</th><th>Exothermique</th></tr>
+        <tr><td>Fusion, vaporisation, sublimation</td><td>Solidification, condensation, liquéfaction</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ÉNERGIE MASSIQUE -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-dot" style="background:var(--accent2)"></div>
+      <div class="card-title">Énergie massique l</div>
+    </div>
+    <div class="card-body">
+      <div class="formula-block">
+        <div class="formula-label">Formule clé</div>
+        l = Q / m  ⟹  Q = m × l<br><br>
+        Q : énergie (J)<br>
+        m : masse du système (kg)<br>
+        l : énergie massique (J/kg)
+      </div>
+      <div class="examples">
+        <div class="ex-label">Exemples</div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text">Fusion glace : l<sub>fus</sub>=334 kJ/kg ; m=450g<span class="eq">Q = 334×10³ × 0,45 = 1,50×10⁵ J</span></span></div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text">Vaporisation eau : l<sub>vap</sub>=2511 kJ/kg ; Q=130 kJ<span class="eq">m = 130/2511 = 5,2×10⁻² kg</span></span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════ CHAPITRE 13 -->
+<div class="chapitre ch13" style="margin-top:50px">
+  <div class="chapitre-num">Chap. 13</div>
+  <div class="chapitre-title">Transformations chimiques</div>
+</div>
+
+<div class="grid">
+
+  <!-- TRANSFORMATION CHIMIQUE -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-dot" style="background:var(--accent3)"></div>
+      <div class="card-title">Transformation chimique</div>
+    </div>
+    <div class="card-body">
+      <div class="def">Un système évolue d'un état initial à un état final avec <strong>consommation de certaines espèces</strong> (réactifs) et <strong>formation de nouvelles espèces</strong> (produits).</div>
+      <div class="examples">
+        <div class="ex-label">Exemples</div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text"><strong>Combustion méthane :</strong> CH₄ + O₂ → CO₂ + H₂O</span></div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text"><strong>Corrosion par acide :</strong><span class="eq">Fe + H⁺ → Fe²⁺ + H₂</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ÉQUATION DE RÉACTION -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-dot" style="background:var(--accent1)"></div>
+      <div class="card-title">Équation de réaction</div>
+    </div>
+    <div class="card-body">
+      <div class="def">L'équation doit être <strong>équilibrée</strong> pour respecter la conservation des <em>éléments chimiques</em> et de la <em>charge électrique</em>. On utilise des <strong>nombres stœchiométriques</strong>.</div>
+      <div class="formula-block">
+        <div class="formula-label">Règles d'équilibrage</div>
+        1. Équilibrer C, puis H, puis O<br>
+        2. Vérifier la charge électrique
+      </div>
+      <div class="examples">
+        <div class="ex-label">Exemples équilibrés</div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text">Éthanol :<span class="eq">C₂H₆O + 3O₂ → 2CO₂ + 3H₂O</span></span></div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text">Propane :<span class="eq">C₃H₈ + 5O₂ → 3CO₂ + 4H₂O</span></span></div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text">Aluminium :<span class="eq">2Al + 6H⁺ → 2Al³⁺ + 3H₂</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RÉACTIF LIMITANT -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-dot" style="background:var(--accent4)"></div>
+      <div class="card-title">Réactif limitant</div>
+    </div>
+    <div class="card-body">
+      <div class="def">Le <strong>réactif limitant</strong> est entièrement consommé lors d'une transformation totale. Les autres réactifs sont <em>en excès</em>. Sa disparition arrête la réaction.</div>
+      <div class="formula-block">
+        <div class="formula-label">Identification — réaction aA + bB → ...</div>
+        Si n(A)/a &lt; n(B)/b  ⟹  A est limitant<br>
+        Si n(A)/a &gt; n(B)/b  ⟹  B est limitant
+      </div>
+      <div class="examples">
+        <div class="ex-label">Méthode</div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text">Comparer les quotients n(réactif)/coefficient stœchio</span></div>
+        <div class="ex-item"><span class="ex-arrow">→</span><span class="ex-text">Le plus petit quotient → réactif limitant</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NUCLÉAIRE vs CHIMIQUE vs PHYSIQUE -->
+  <div class="card card-wide">
+    <div class="card-header">
+      <div class="card-dot" style="background:var(--accent5)"></div>
+      <div class="card-title">Comparaison des 3 types de transformations</div>
+    </div>
+    <div class="card-body">
+      <table class="mini-table">
+        <tr>
+          <th></th>
+          <th><span class="tag tag-blue">Nucléaire</span></th>
+          <th><span class="tag tag-pink">Physique</span></th>
+          <th><span class="tag tag-green">Chimique</span></th>
+        </tr>
+        <tr>
+          <td>Ce qui change</td>
+          <td>Noyaux atomiques</td>
+          <td>État de la matière</td>
+          <td>Espèces chimiques</td>
+        </tr>
+        <tr>
+          <td>Ce qui est conservé</td>
+          <td>A et Z (lois de conservation)</td>
+          <td>Entités et espèces chimiques</td>
+          <td>Éléments chimiques + charge</td>
+        </tr>
+        <tr>
+          <td>Éléments chimiques</td>
+          <td>Non conservés</td>
+          <td>Conservés</td>
+          <td>Conservés</td>
+        </tr>
+        <tr>
+          <td>Énergie mise en jeu</td>
+          <td>Très élevée (10¹⁰ J/g)</td>
+          <td>Modérée (Q = m×l)</td>
+          <td>Modérée</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<footer>Fiche de révision · Transformations de la matière · 2025-2026</footer>
+
+</body>
+</html>
